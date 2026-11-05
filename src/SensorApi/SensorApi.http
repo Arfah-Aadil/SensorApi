@@ -1,0 +1,28 @@
+@baseUrl = http://localhost:5041
+
+### 1. Add a valid pH reading
+POST {{baseUrl}}/api/bioreactors/BR-01/readings
+Content-Type: application/json
+
+{ "type": "Ph", "value": 7.1 }
+
+### 2. Add another valid pH reading
+POST {{baseUrl}}/api/bioreactors/BR-01/readings
+Content-Type: application/json
+
+{ "type": "Ph", "value": 6.9 }
+
+### 3. Add an invalid reading (should be rejected)
+POST {{baseUrl}}/api/bioreactors/BR-01/readings
+Content-Type: application/json
+
+{ "type": "Ph", "value": 9.5 }
+
+### 4. Get all readings
+GET {{baseUrl}}/api/bioreactors/BR-01/readings
+
+### 5. Get the pH summary
+GET {{baseUrl}}/api/bioreactors/BR-01/readings/summary?type=Ph
+
+### 6. Summary for a bioreactor with no data (should be 404)
+GET {{baseUrl}}/api/bioreactors/BR-99/readings/summary?type=Ph
